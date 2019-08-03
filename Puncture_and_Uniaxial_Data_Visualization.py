@@ -101,6 +101,9 @@ recipe_three_trial_eleven_stress, recipe_three_trial_eleven_strain, recipe_three
 # To DO: Add horizontal line for elastic modulus, 8 kPa,
 
 plt.subplot2grid((4,2), (0,0))
+plt.tight_layout(pad = 0.4)
+plt.ylabel("Puncture Force (N)")
+plt.xlabel("Time Elapsed (s)")
 #plt.suptitle("Puncture Forces of Synthetic Recipes and Real Human Tissues", fontsize = 25)
 #plt.subplots_adjust(wspace = 0.3)
 #plt.title("Recipe 1", loc = "Center", fontsize = 20)
@@ -131,6 +134,8 @@ plt.plot(right_leg_trial_six_time, right_leg_trial_six_force, linewidth = 0.4, c
 #plt.legend(loc = "upper right")
 
 plt.subplot2grid((4,2), (0,1))
+plt.tight_layout(pad = 0.4)
+plt.ylabel("Puncture Force per Thickness Ratio (F / mm)")
 #plt.title("Normalized Puncture Force", loc = "Center", fontsize = 20)
 recipe_one_max_force_list = [max(recipe_one_trial_one_force) / recipe_one_trial_one_thickness, max(recipe_one_trial_two_force) / recipe_one_trial_two_thickness,
                              max(recipe_one_trial_three_force) / recipe_one_trial_three_thickness, max(recipe_one_trial_four_force) / recipe_one_trial_four_thickness,
@@ -143,12 +148,15 @@ right_leg_max_force_list = [max(right_leg_trial_one_force) / right_leg_trial_one
                              max(right_leg_trial_three_force) / right_leg_trial_three_thickness, max(right_leg_trial_four_force) / right_leg_trial_four_thickness,
                              max(right_leg_trial_five_force) / right_leg_trial_five_thickness, max(right_leg_trial_six_force) / right_leg_trial_six_thickness]
 list_of_max_force_lists = [recipe_one_max_force_list, recipe_three_max_force_list, right_leg_max_force_list]
-plt.boxplot(list_of_max_force_lists)
+plt.boxplot(list_of_max_force_lists, labels = ["Recipe 1", "Recipe 3", "Human\nTissue"])
 #plt.xticks([1, 2, 3], labels = ["Recipe 1", "Recipe 3", "Human Tissue"], fontsize = 14)
 #plt.ylabel('Force (N / mm Thickness)', fontsize = 17)
 #plt.ylim(bottom = 0, top = 0.4)
 
 plt.subplot2grid((4,2), (1,0), colspan = 2)
+plt.tight_layout(pad = 0.4)
+plt.ylabel("Recipe One Stress (Pa)")
+plt.xlabel("Recipe One Strain")
 #plt.subplots_adjust(hspace = 0.7)
 plt.plot(recipe_one_trial_one_strain, recipe_one_trial_one_stress, linewidth = 0.4, color = "b", label = "Trial 1")
 plt.plot(recipe_one_trial_two_strain, recipe_one_trial_two_stress, linewidth = 0.4, color = "tab:orange", label = "Trial 2")
@@ -172,6 +180,9 @@ plt.plot(recipe_one_trial_nine_strain, recipe_one_trial_nine_stress, linewidth =
 #plt.ylabel('Stress (kPa)', fontsize = 17)
 
 plt.subplot2grid((4,2), (2,0), colspan = 2)
+plt.tight_layout(pad = 0.4)
+plt.ylabel("Recipe Three Stress (Pa)")
+plt.xlabel("Recipe Three Strain")
 #plt.subplots_adjust(hspace = 0.7)
 plt.plot(recipe_three_trial_one_strain, recipe_three_trial_one_stress, linewidth = 0.4, color = "tab:olive", label = "Trial 1")
 # Trial 2 left out because failed early, during preconditioning
@@ -198,6 +209,8 @@ plt.plot(recipe_three_trial_eleven_strain, recipe_three_trial_eleven_stress, lin
 #plt.ylabel('Stress (kPa)', fontsize = 17)
 
 plt.subplot2grid((4,2), (3,0), colspan = 2)
+plt.tight_layout(pad = 0.4)
+plt.ylabel("Synthetic Tissue Stress (Pa)")
 recipe_one_stress_list = [max(recipe_one_trial_one_stress_f), max(recipe_one_trial_two_stress_f), max(recipe_one_trial_three_stress_f), max(recipe_one_trial_four_stress_f), max(recipe_one_trial_five_stress_f),
                           max(recipe_one_trial_six_stress_f), max(recipe_one_trial_eight_stress_f), max(recipe_one_trial_nine_stress_f)]
 recipe_three_stress_list = [max(recipe_three_trial_one_stress_f), max(recipe_three_trial_three_stress_f), max(recipe_three_trial_five_stress_f), max(recipe_three_trial_six_stress_f), max(recipe_three_trial_seven_stress_f),
