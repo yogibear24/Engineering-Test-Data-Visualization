@@ -96,21 +96,18 @@ recipe_three_trial_nine_stress, recipe_three_trial_nine_strain, recipe_three_tri
 recipe_three_trial_ten_stress, recipe_three_trial_ten_strain, recipe_three_trial_ten_stress_f, recipe_three_trial_ten_strain_f = parse_uniaxial_data(4.003, 5.802, 29.46, "C:/Users/Everet/Documents/CREST/Uniaxial_Testing/Synthetic_Fat/03252019_Recipe_3_Trial_10 03262019 044037_tdf.CSV")
 recipe_three_trial_eleven_stress, recipe_three_trial_eleven_strain, recipe_three_trial_eleven_stress_f, recipe_three_trial_eleven_strain_f = parse_uniaxial_data(3.188, 5.783, 27.26, "C:/Users/Everet/Documents/CREST/Uniaxial_Testing/Synthetic_Fat/03252019_Recipe_3_Trial_11 03262019 045339_tdf.CSV")
 
-# Cannot do simple averages/standard deviations because assumes all numpy arrays are the same dimension
-# TO DO: Include Fat Comparison Data??
-# To DO: Add horizontal line for elastic modulus, 8 kPa,
+
+def plot_asethetic_parameters():
+    plt.tight_layout(pad=0.4)
+    plt.tick_params(axis="x", labelsize=8, pad=0.4)
+    plt.tick_params(axis="y", labelsize=8, pad=0.4)
 
 plt.subplot2grid((4,2), (0,0))
-plt.tight_layout(pad = 0.4)
-plt.ylabel("Puncture Force (N)")
-plt.xlabel("Time Elapsed (s)")
-#plt.suptitle("Puncture Forces of Synthetic Recipes and Real Human Tissues", fontsize = 25)
-#plt.subplots_adjust(wspace = 0.3)
-#plt.title("Recipe 1", loc = "Center", fontsize = 20)
-#plt.xlabel('Time', fontsize = 17)
-#plt.ylabel('Force (N)', fontsize = 17)
-#plt.xlim(left = 0, right = 13)
-#plt.ylim(bottom = 0, top = 2.5)
+plot_asethetic_parameters()
+plt.ylabel("Puncture\nForce (N)", fontsize = 8)
+plt.xlabel("Time Elapsed (s)", fontsize = 8)
+plt.title("Puncture Forces of Synthetic Recipes\nand Real Human Tissues", fontsize = 9)
+
 plt.plot(recipe_one_trial_one_time, recipe_one_trial_one_force, linewidth = 0.4, color = "b")
 plt.plot(recipe_one_trial_two_time, recipe_one_trial_two_force, linewidth = 0.4, color = "b")
 plt.plot(recipe_one_trial_three_time, recipe_one_trial_three_force, linewidth = 0.4, color = "b")
@@ -134,9 +131,10 @@ plt.plot(right_leg_trial_six_time, right_leg_trial_six_force, linewidth = 0.4, c
 #plt.legend(loc = "upper right")
 
 plt.subplot2grid((4,2), (0,1))
-plt.tight_layout(pad = 0.4)
-plt.ylabel("Puncture Force per Thickness Ratio (F / mm)")
-#plt.title("Normalized Puncture Force", loc = "Center", fontsize = 20)
+plot_asethetic_parameters()
+plt.ylabel("Puncture Force per\nThickness Ratio (F / mm)", fontsize = 8)
+plt.title("Puncture Force per Thickness\nRatio of Various Tissues", fontsize = 9)
+
 recipe_one_max_force_list = [max(recipe_one_trial_one_force) / recipe_one_trial_one_thickness, max(recipe_one_trial_two_force) / recipe_one_trial_two_thickness,
                              max(recipe_one_trial_three_force) / recipe_one_trial_three_thickness, max(recipe_one_trial_four_force) / recipe_one_trial_four_thickness,
                              max(recipe_one_trial_five_force) / recipe_one_trial_five_thickness, max(recipe_one_trial_six_force) / recipe_one_trial_six_thickness,
@@ -149,15 +147,14 @@ right_leg_max_force_list = [max(right_leg_trial_one_force) / right_leg_trial_one
                              max(right_leg_trial_five_force) / right_leg_trial_five_thickness, max(right_leg_trial_six_force) / right_leg_trial_six_thickness]
 list_of_max_force_lists = [recipe_one_max_force_list, recipe_three_max_force_list, right_leg_max_force_list]
 plt.boxplot(list_of_max_force_lists, labels = ["Recipe 1", "Recipe 3", "Human\nTissue"])
-#plt.xticks([1, 2, 3], labels = ["Recipe 1", "Recipe 3", "Human Tissue"], fontsize = 14)
-#plt.ylabel('Force (N / mm Thickness)', fontsize = 17)
-#plt.ylim(bottom = 0, top = 0.4)
+
 
 plt.subplot2grid((4,2), (1,0), colspan = 2)
-plt.tight_layout(pad = 0.4)
-plt.ylabel("Recipe One Stress (Pa)")
-plt.xlabel("Recipe One Strain")
-#plt.subplots_adjust(hspace = 0.7)
+plot_asethetic_parameters()
+plt.ylabel("Recipe One\nStress (kPa)", fontsize = 8)
+plt.xlabel("Recipe One Strain", fontsize = 8)
+plt.title("Stress-Strain Behavior of Synthetic Tissue Recipe One", fontsize = 9)
+
 plt.plot(recipe_one_trial_one_strain, recipe_one_trial_one_stress, linewidth = 0.4, color = "b", label = "Trial 1")
 plt.plot(recipe_one_trial_two_strain, recipe_one_trial_two_stress, linewidth = 0.4, color = "tab:orange", label = "Trial 2")
 plt.plot(recipe_one_trial_three_strain, recipe_one_trial_three_stress, linewidth = 0.4, color = "tab:green", label = "Trial 3")
@@ -167,23 +164,14 @@ plt.plot(recipe_one_trial_six_strain, recipe_one_trial_six_stress, linewidth = 0
 plt.plot(recipe_one_trial_seven_strain, recipe_one_trial_seven_stress, linewidth = 0.4, color = "tab:purple", label = "Trial 7")
 plt.plot(recipe_one_trial_eight_strain, recipe_one_trial_eight_stress, linewidth = 0.4, color = "tab:pink", label = "Trial 8")
 plt.plot(recipe_one_trial_nine_strain, recipe_one_trial_nine_stress, linewidth = 0.4, color = "tab:cyan", label = "Trial 9")
-#plt.axvline(x = 0.3, linestyle = 'dotted', color = "r", label = "Plastic Deformation/Damage Threshold")
-#plt.axhline(y = 5.3, linestyle = 'dashed', color = "r", label = "Subcutaneous Fat Elastic Modulus")
-#plt.axhline(y = 18.1, linestyle = 'dashed', color = "r", label = "Subcutaneous Fat Elastic Modulus")
-#Axis lines above removed because not clincically-relevant
-#plt.title("Recipe 1 Stress-Strain Behavior", loc = "Center", fontsize = 20)
-#plt.legend(loc = "upper right")
-#plt.ylim(bottom = 0, top = 19)
-#plt.xlim(left = 0.1, right = 1.25)
-# left limit is 0.1 to leave out preconditioning behavior and make the plots look better
-#plt.xlabel('Strain', fontsize = 17)
-#plt.ylabel('Stress (kPa)', fontsize = 17)
+
 
 plt.subplot2grid((4,2), (2,0), colspan = 2)
-plt.tight_layout(pad = 0.4)
-plt.ylabel("Recipe Three Stress (Pa)")
-plt.xlabel("Recipe Three Strain")
-#plt.subplots_adjust(hspace = 0.7)
+plot_asethetic_parameters()
+plt.ylabel("Recipe Three\nStress (kPa)", fontsize = 8)
+plt.xlabel("Recipe Three Strain", fontsize = 8)
+plt.title("Stress-Strain Behavior of Synthetic Tissue Recipe Three", fontsize = 9)
+
 plt.plot(recipe_three_trial_one_strain, recipe_three_trial_one_stress, linewidth = 0.4, color = "tab:olive", label = "Trial 1")
 # Trial 2 left out because failed early, during preconditioning
 plt.plot(recipe_three_trial_three_strain, recipe_three_trial_three_stress, linewidth = 0.4, color = "tab:orange", label = "Trial 3")
@@ -196,32 +184,18 @@ plt.plot(recipe_three_trial_eight_strain, recipe_three_trial_eight_stress, linew
 plt.plot(recipe_three_trial_nine_strain, recipe_three_trial_nine_stress, linewidth = 0.4, color = "tab:grey", label = "Trial 9")
 plt.plot(recipe_three_trial_ten_strain, recipe_three_trial_ten_stress, linewidth = 0.4, color = "tab:cyan", label = "Trial 10")
 plt.plot(recipe_three_trial_eleven_strain, recipe_three_trial_eleven_stress, linewidth = 0.4, color = "tab:pink", label = "Trial 11")
-#plt.axvline(x = 0.3, linestyle = 'dotted', color = "r", label = "Plastic Deformation/Damage Threshold")
-#plt.axhline(y = 5.3, linestyle = 'dashed', color = "r", label = "Subcutaneous Fat Elastic Modulus")
-#plt.axhline(y = 18.1, linestyle = 'dashed', color = "r", label = "Subcutaneous Fat Elastic Modulus")
-#Axis lines above removed because not clincically-relevant
-#plt.title("Recipe 3 Stress-Strain Behavior", loc = "Center", fontsize = 20)
-#plt.legend(loc = "upper right")
-#plt.ylim(bottom = 0, top = 19)
-#plt.xlim(left = 0.1, right = 1.25)
-# left limit is 0.1 to leave out preconditioning behavior and make the plots look better
-#plt.xlabel('Strain', fontsize = 17)
-#plt.ylabel('Stress (kPa)', fontsize = 17)
+
 
 plt.subplot2grid((4,2), (3,0), colspan = 2)
-plt.tight_layout(pad = 0.4)
-plt.ylabel("Synthetic Tissue Stress (Pa)")
+plot_asethetic_parameters()
+plt.ylabel("Synthetic Tissue\nStress (kPa)", fontsize = 8)
+plt.title("Fracture Stresses of Various Synthetic Tissue Recipes", fontsize = 9)
+
 recipe_one_stress_list = [max(recipe_one_trial_one_stress_f), max(recipe_one_trial_two_stress_f), max(recipe_one_trial_three_stress_f), max(recipe_one_trial_four_stress_f), max(recipe_one_trial_five_stress_f),
                           max(recipe_one_trial_six_stress_f), max(recipe_one_trial_eight_stress_f), max(recipe_one_trial_nine_stress_f)]
 recipe_three_stress_list = [max(recipe_three_trial_one_stress_f), max(recipe_three_trial_three_stress_f), max(recipe_three_trial_five_stress_f), max(recipe_three_trial_six_stress_f), max(recipe_three_trial_seven_stress_f),
                             max(recipe_three_trial_eight_stress_f), max(recipe_three_trial_nine_stress_f), max(recipe_three_trial_ten_stress_f), max(recipe_three_trial_eleven_stress_f)]
 list_of_stress_arrays = [recipe_one_stress_list, recipe_three_stress_list]
 plt.boxplot(list_of_stress_arrays, labels = ["Recipe 1", "Recipe 3"])
-#plt.ylabel('Stress (kPa)', fontsize = 17)
-#plt.xticks([1, 2], labels = ["Recipe 1", "Recipe 3"], fontsize = 17)
-#plt.title("Ultimate Tensile Strength of Synthetic Tissue Recipes", loc = "Center", fontsize = 20)
-#plt.ylim(bottom = 0, top = 20)
 
 plt.show()
-
-# Also show basic summary stats of data, etc.
